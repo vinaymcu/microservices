@@ -1,0 +1,281 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"definitions": {
+		"Header": {
+			"type": "object",
+			"properties": {
+				"MessageId": {
+					"description": "Id of the message.",
+					"type": "integer",
+					"maxlength": 11
+				},
+				"MessageName": {
+					"description": "Name of the message",
+					"type": "string",
+					"maxlength": 75
+				},
+				"DistributionMode": {
+					"description": "Distribure mode of created message",
+					"enum": [
+						"Multicast",
+						"Broadcast",
+						"Unicast"
+					]
+				},
+				"IsPopupMessage": {
+					"description": "The message flag to indicate if the message is a Popup. Default value is false.",
+					"type": "boolean"
+				},
+				"MessageType": {
+					"description": "Type of Message. It can be Product, Service or CTA",
+					"enum": [
+						"Product",
+						"Service",
+						"CTA"
+					]
+				},
+				"CreationDateTime": {
+					"description": "Creation time of the message. This is read-only. System will generate the creation time",
+					"type": "string",
+					"maxlength": 30
+				},
+				"DisplayDateTime": {
+					"description": "Desired time and date, when message should be displayed. Default value will be immediately",
+					"type": "string",
+					"maxlength": 30
+				},
+				"ValidityDateTime": {
+					"description": "Date and time after which display of message is no longer needed",
+					"type": "string",
+					"maxlength": 30
+				},
+				"AutoHideTime": {
+					"description": " Time (In seconds) a message is displayed before automatically being dismissed.  Value of 0 would mean subscriber must explicitly dismiss the message with the dismiss button. Autohide time only applies to  plain text messages, not to URL based messages.",
+					"type": "integer",
+					"maxlength": 3,
+					"minimum": 0
+				},
+				"Status": {
+					"description": "Status of message. Default value is Inactive.",
+					"type": "string",
+					"maxlength": 20
+				}
+			},
+			"required": [
+				"MessageName",
+				"DistributionMode",
+				"IsPopupMessage",
+				"MessageType",
+				"ValidityDateTime",
+				"AutoHideTime"
+			]
+		},
+		"Filter": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"IP_Address": {
+						"description": "IP address of Client device",
+						"type": "string",
+						"maxlength": 20
+					},
+					"PackageID": {
+						"description": "Id of Package assigned to the subscriber",
+						"type": "string",
+						"maxlength": 50
+					},
+					"Watched_Channel_ID": {
+						"description": "External ID of the watched channel",
+						"type": "string",
+						"maxlength": 30
+					},
+					"LocationID": {
+						"description": "Location Id of subscriber",
+						"type": "string",
+						"maxlength": 30
+					},
+					"SW_Version": {
+						"description": "SW version currently on the client device",
+						"type": "string",
+						"maxlength": 30
+					},
+					"HW_Version": {
+						"description": "HW version currently on the client device",
+						"type": "string",
+						"maxlength": 30
+					},
+					"UI_Version": {
+						"description": "UI version currently on the client device",
+						"type": "string",
+						"maxlength": 30
+					},
+					"UI_Language": {
+						"description": "UI language currently on the client device",
+						"type": "string",
+						"maxlength": 30
+					},
+					"FIPS": {
+						"description": "FIPS Code",
+						"type": "string",
+						"maxlength": 6
+					}
+				}
+			}
+		},
+		"Body": {
+			"type": "object",
+			"properties": {
+				"MessageURL": {
+					"description": "URL are message to be display on client device",
+					"type": "string",
+					"maxlength": 1000
+				},
+				"MessageText": {
+					"description": "Message text to be display on client device",
+					"type": "string",
+					"maxlength": 1024
+				},
+				"MessagePopupText": {
+					"description": "Message text if Popup message is set as true",
+					"type": "string",
+					"maxlength": 1024
+				}
+			}
+		},
+		"SubscriberId": {
+			"description": "Id of Subscriber",
+			"type": "string",
+			"maxlength": 100
+		},
+		"Stbs": {
+			"type": "object",
+			"properties": {
+				"Stb": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"MAC_Address": {
+								"description": "MAC Address of STB",
+								"type": "string",
+								"maxlength": 20
+							}
+						},
+						"required": [
+							"MAC_Address"
+						]
+					}
+				}
+			},
+			"required": [
+				"Stb"
+			]
+		},
+		"UnicastMessage": {
+			"type": "object",
+			"properties": {
+				"Header": {
+					"$ref": "#/definitions/Header"
+				},
+				"Body": {
+					"$ref": "#/definitions/Body"
+				},
+				"SubscriberId": {
+					"$ref": "#/definitions/SubscriberId"
+				},
+				"Stbs": {
+					"$ref": "#/definitions/Stbs"
+				}
+			},
+			"required": [
+				"Header",
+				"Body"
+			]
+		},
+		"MulticastMessage": {
+			"type": "object",
+			"properties": {
+				"Header": {
+					"$ref": "#/definitions/Header"
+				},
+				"Body": {
+					"$ref": "#/definitions/Body"
+				},
+				"Filter": {
+					"$ref": "#/definitions/Filter"
+				}
+			},
+			"required": [
+				"Header",
+				"Body"
+			]
+		},
+		"UnicastMessageAssociation": {
+			"type": "object",
+			"properties": {
+				"SubscriberId": {
+					"$ref": "#/definitions/SubscriberId"
+				},
+				"Stbs": {
+					"$ref": "#/definitions/Stbs"
+				}
+			},
+			"required": [
+				"SubscriberId",
+				"Stbs"
+			]
+		},
+		"MulticastMessageFilter": {
+			"type": "object",
+			"properties": {
+				"Filter": {
+					"$ref": "#/definitions/Filter"
+				 }
+			},
+			"required": [
+				"Filter"
+			]
+		},
+		"resultObject": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"resultCode": {
+						"type": "String",
+						"description": "ACN_200 in case of success response, ACN_XXXX in case of error"
+					},
+					"resultDescription": {
+						"type": "String",
+						"description": "OK if resultCode is ACN_200, otherwise it will be the description of the error."
+					},
+					"id": {
+						"type": "string",
+						"description": "Id of the message"
+					},
+					"UnicastMessage": {
+						"type" : "array",
+						"$ref": "#/definitions/UnicastMessage"
+					},
+					"MulticastMessage": {
+						"type" : "array",
+						"$ref": "#/definitions/MulticastMessage"
+					},
+					"UnicastMessageAssociation": {
+						"type" : "array",
+						"$ref": "#/definitions/UnicastMessageAssociation"
+					},
+					"MulticastMessageFilter": {
+						"type": "array",
+						"$ref": "#/definitions/MulticastMessageFilter"
+					}
+				},
+				"required": [
+					"resultDescription",
+					"resultCode"
+				]
+			}
+		}
+	}
+}

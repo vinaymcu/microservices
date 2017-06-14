@@ -1,0 +1,12 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"type": "object",
+	"properties": {
+		"MulticastMessages": {
+			"type": "array",
+			"items": {
+				"$ref": "common.json#/definitions/MulticastMessage"
+			}
+		}
+	}
+}

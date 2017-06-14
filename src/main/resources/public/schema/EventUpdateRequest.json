@@ -1,0 +1,39 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"type": "object",
+	"properties": {
+		"EventUpdate": {
+			"type": "object",
+			"properties": {
+				"TriggerType": {
+					"type": "string",
+					"description": "Trigger Type like T_SUBSCRIBER_INFO, T_FAVORITES etc"
+				},
+				"SubscriberId": {
+					"type": "string"
+				},
+				"MACAddress": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"description": "List of Mac addresses of client STB.If trigger type is T_MESSAGE_INFO then MACAddress would be treated as target. If trigger type is other than T_MESSAGE_INFO then only the first MACAddress in list would be considered and would filter out to from target STBs."
+					}
+				},
+				"TriggerInfo": {
+					"type": "string",
+					"description": "Additional inforamtion requied for trigger like message id"
+				},
+				"Timestamp": {
+					"type": "string",
+					"description": "Epoch Time of notification. this is required to send trigger to TQS server"
+				}
+			},
+			"required": [
+				"TriggerType",
+				"SubscriberId",
+				"Timestamp" ]
+		}
+	},
+	"required": [
+		"EventUpdate" ]
+}

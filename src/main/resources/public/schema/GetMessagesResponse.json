@@ -1,0 +1,41 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"type": "object",
+	"properties": {
+		"Messages": {
+			"type": "object",
+			"properties":{
+			"Message": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"Header": {
+						"$ref": "common.json#/definitions/Header"
+					},
+					"Body": {
+						"$ref": "common.json#/definitions/Body"
+					},
+					"SubscriberId": {
+						"$ref": "common.json#/definitions/SubscriberId"
+					},
+					"Stbs": {
+						"$ref": "common.json#/definitions/Stbs"
+					},
+					"Filter": {
+						"$ref": "common.json#/definitions/Filter"
+					}
+				},
+				"required": [
+					"Header",
+					"Body"
+				]
+			}
+			}
+			}
+		}
+	},
+	"required": [
+		"MESSAGES"
+	]
+}

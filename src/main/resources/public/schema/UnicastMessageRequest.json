@@ -1,0 +1,15 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"type": "object",
+	"properties": {
+		"UnicastMessage": {
+			"type": "array",
+			"items": {
+				"$ref": "common.json#/definitions/UnicastMessage"
+			}
+		}
+	},
+	"required": [
+	             "UnicastMessage"
+	             ]
+}

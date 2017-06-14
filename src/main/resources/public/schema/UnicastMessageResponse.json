@@ -1,0 +1,21 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"type": "object",
+	"properties": {
+		"resultCode": {
+			"type": "String",
+			"description": "It will be valorized only in case of generic Error, that is only in case the MS will not able to execute the requested interface, for example in case of the DataBase is down(ACN_300)."
+		},
+		"resultDescription": {
+			"type": "String",
+			"description": "Description Error. Example:  300-GENERIC ERROR.  In the other case it will be not present."
+		},
+		"resultObject": {
+			"$ref": "common.json#/definitions/resultObject"
+		},
+		"systemTime": {
+			"type": "Integer",
+			"description": "GM Time in Milliseconds"
+		}
+	}
+}

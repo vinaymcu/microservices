@@ -1,0 +1,61 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"type": "object",
+	"properties": {
+		"MessageList": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"MessageId": {
+						"description": "Id of the message.",
+						"type": "integer",
+						"maxlength": 11
+					},
+					"MessageName": {
+						"description": "Name of the message",
+						"type": "string",
+						"maxlength": 75
+					},
+					"DistributionMode": {
+						"description": "Distribure mode of created message",
+						"enum": [ "Multicast", "Broadcast", "Unicast" ]
+					},
+					"CreationDate": {
+						"description": "Creation time of the message. This is read-only. System will generate the creation time.",
+						"type": "string",
+						"maxlength": 30
+					},
+					"ActivationDate": {
+						"description": "Desired time and date, when message should be displayed.",
+						"type": "string",
+						"maxlength": 30
+					},
+					"ExprireDate": {
+						"description": "Date and time after which display of message is no longer needed.",
+						"type": "string",
+						"maxlength": 30
+					},
+					"Status": {
+						"description": "Status of the message",
+						"type": "string",
+						"maxlength": 20
+					}
+				},
+				"required": [
+					"MessageId",
+					"MessageName",
+					"DistributionMode",
+					"CreationDate",
+					"ActivationDate",
+					"ExprireDate",
+					"Status"
+				]
+			}
+		}
+	},
+	"required": [
+		"MessageList"
+	]
+}
+

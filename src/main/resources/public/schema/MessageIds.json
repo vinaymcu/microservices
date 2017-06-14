@@ -1,0 +1,25 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"type": "object",
+	"properties": {
+		"MessageIds": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"MessageId": {
+						"description": "Message Id of the message.",
+						"type": "integer",
+						"maxlength": 11
+					}
+				},
+				"required": [
+					"MessageId"
+				]
+			}
+		}
+	},
+	"required": [
+		"MessageIds"
+	]
+}
